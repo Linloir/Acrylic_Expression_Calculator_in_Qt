@@ -100,6 +100,41 @@ Acrylic::Acrylic(QWidget *parent)
     ui->displayHis->setTextFormat(Qt::RichText);
     ui->displayHis->setAttribute(Qt::WA_TransparentForMouseEvents);
 
+    //Adjust Colors of the buttons
+    ui->opAdd   ->setColor(QColor(250, 250, 250, 190));
+    ui->opSub   ->setColor(QColor(250, 250, 250, 190));
+    ui->opMulti ->setColor(QColor(250, 250, 250, 190));
+    ui->opDiv   ->setColor(QColor(250, 250, 250, 190));
+    ui->opSqr   ->setColor(QColor(250, 250, 250, 190));
+    ui->opPow   ->setColor(QColor(250, 250, 250, 190));
+    ui->opMod   ->setColor(QColor(250, 250, 250, 190));
+    ui->opBrckL ->setColor(QColor(250, 250, 250, 190));
+    ui->opBrckR ->setColor(QColor(250, 250, 250, 190));
+    ui->opClear ->setColor(QColor(250, 250, 250, 190));
+    ui->bckSpace->setColor(QColor(250, 250, 250, 190));
+    ui->opAdd   ->setHoverColor(QColor(70, 70, 70, 70));
+    ui->opSub   ->setHoverColor(QColor(70, 70, 70, 70));
+    ui->opMulti ->setHoverColor(QColor(70, 70, 70, 70));
+    ui->opDiv   ->setHoverColor(QColor(70, 70, 70, 70));
+    ui->opSqr   ->setHoverColor(QColor(70, 70, 70, 70));
+    ui->opPow   ->setHoverColor(QColor(70, 70, 70, 70));
+    ui->opMod   ->setHoverColor(QColor(70, 70, 70, 70));
+    ui->opBrckL ->setHoverColor(QColor(70, 70, 70, 70));
+    ui->opBrckR ->setHoverColor(QColor(70, 70, 70, 70));
+    ui->opClear ->setHoverColor(QColor(70, 70, 70, 70));
+    ui->bckSpace->setHoverColor(QColor(70, 70, 70, 70));
+    ui->opAdd   ->setClickedColor(QColor(30, 30, 30, 70));
+    ui->opSub   ->setClickedColor(QColor(30, 30, 30, 70));
+    ui->opMulti ->setClickedColor(QColor(30, 30, 30, 70));
+    ui->opDiv   ->setClickedColor(QColor(30, 30, 30, 70));
+    ui->opSqr   ->setClickedColor(QColor(30, 30, 30, 70));
+    ui->opPow   ->setClickedColor(QColor(30, 30, 30, 70));
+    ui->opMod   ->setClickedColor(QColor(30, 30, 30, 70));
+    ui->opBrckL ->setClickedColor(QColor(30, 30, 30, 70));
+    ui->opBrckR ->setClickedColor(QColor(30, 30, 30, 70));
+    ui->opClear ->setClickedColor(QColor(30, 30, 30, 70));
+    ui->bckSpace->setClickedColor(QColor(30, 30, 30, 70));
+
     //Connect the buttons with input
     connect(ui->num0, &QPushButton::clicked, [=](){expr.insert('0'); RfrInput(); UpdStack();});
     connect(ui->num1, &QPushButton::clicked, [=](){expr.insert('1'); RfrInput(); UpdStack();});
