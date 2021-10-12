@@ -5,9 +5,20 @@ InfoPage::InfoPage(QWidget* parent) : TabPage(parent)
     QVBoxLayout* mainLayout = new QVBoxLayout;
     mainLayout->setContentsMargins(0, 0, 0, 0);
     this->setLayout(mainLayout);
-    mainLayout->setAlignment(Qt::AlignCenter);
-    QTextBrowser* InfoBrowser = new QTextBrowser(this);
-    InfoBrowser->setHtml("<h2>\
+    //mainLayout->setAlignment(Qt::AlignCenter);
+
+    QFile htmlPage(":/html/info.html");
+    QString html;
+    if (htmlPage.open(QIODevice::ReadOnly | QIODevice::Text)){
+        while (!htmlPage.atEnd()){
+            QByteArray line = htmlPage.readLine();
+            QString str(line);
+            html.append(str);
+        }
+        htmlPage.close();
+    }
+    else{
+        html.append("<h2>\
     <span style=\"font-size:14px;\"><strong><span style=\"font-size:16px;\">About This Application:</span></strong></span>\
 </h2>\
 <p>\
@@ -22,7 +33,16 @@ InfoPage::InfoPage(QWidget* parent) : TabPage(parent)
 <p>\
     <br />\
 </p>");
+    }
+
+    QTextBrowser* InfoBrowser = new QTextBrowser;
+    InfoBrowser->setHtml(html);
     InfoBrowser->setStyleSheet("background:transparent;border-width:0;border-style:outset");
     InfoBrowser->setOpenExternalLinks(true);
-    mainLayout->addWidget(InfoBrowser);
+    InfoBrowser->resize(InfoBrowser->width(), 800);
+    //InfoBrowser->setAttribute(Qt::WA_TransparentForMouseEvents);
+
+    ScrollAreaCustom* scrollarea = new ScrollAreaCustom(this);
+    mainLayout->addWidget(scrollarea);
+    scrollarea->addWidget(InfoBrowser);
 }

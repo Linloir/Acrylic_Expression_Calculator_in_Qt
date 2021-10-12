@@ -2,10 +2,14 @@
 #define INFOPAGE_H
 
 #include "tabpage.h"
+#include "scrollareacustom.h"
 #include <QVBoxLayout>
 #include <QTextBrowser>
 #include <QWidget>
 #include <QDesktopServices>
+#include <QFile>
+#include <QApplication>
+#include <QDir>
 
 class InfoPage : public TabPage
 {

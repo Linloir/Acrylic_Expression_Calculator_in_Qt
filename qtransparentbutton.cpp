@@ -19,7 +19,10 @@ void QTransparentButton::paintEvent(QPaintEvent *event){
     //test.setBrush(Qt::NoBrush);
 
     QPainter textPainter(this);
-    QFont textFont("FuturaNo2D", 14);
+    textPainter.setRenderHint(QPainter::TextAntialiasing);
+    textPainter.setPen(textColor);
+    textFont.setBold(bold);
+    //QFont textFont("FuturaNo2D", 14);
     textPainter.setFont(textFont);
     int widthOfText = textPainter.fontMetrics().size(Qt::TextSingleLine, buttonText).width();
     int heightOfText = textPainter.fontMetrics().ascent() - textPainter.fontMetrics().descent() + textPainter.fontMetrics().leading();

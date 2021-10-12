@@ -2,6 +2,7 @@
 #define ACRYLIC_H
 
 #include <QDialog>
+#include <QKeyEvent>
 #include "WindowCompositionAttribute.h"
 #include "additiontabwidget.h"
 #include "ConvertFunc.h"
@@ -17,11 +18,15 @@ class Acrylic : public QDialog
 public:
     Acrylic(QWidget *parent = nullptr);
     ~Acrylic();
+
+private:
     void paintEvent(QPaintEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
     void leaveEvent(QEvent *event){this->setCursor(Qt::ArrowCursor); pressed = false; mouseState = 0;}
+    void keyPressEvent(QKeyEvent* event);
+    //void keyReleaseEvent(QKeyEvent* event);
 
 private:
 

@@ -4,10 +4,12 @@ StackPage::StackPage(QWidget* parent) : TabPage(parent)
 {
     this->setMouseTracking(true);
     //this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    QVBoxLayout* mainLayout = new QVBoxLayout;
+    QHBoxLayout* mainLayout = new QHBoxLayout;
     mainLayout->setContentsMargins(0, 0, 0, 0);
     this->setLayout(mainLayout);
 
+    QVBoxLayout* numLayout = new QVBoxLayout;
+    numLayout->setContentsMargins(0, 0, 0, 0);
     QLabel* labNum = new QLabel;
     QFont labFont("DengXian", 13);
     labFont.setBold(true);
@@ -16,22 +18,27 @@ StackPage::StackPage(QWidget* parent) : TabPage(parent)
     labNum->setAlignment(Qt::AlignRight | Qt::AlignTop);
     labNum->setStyleSheet("color:#E75E5E5E;");
     labNum->setMaximumHeight(20);
-    mainLayout->addWidget(labNum);
+    numLayout->addWidget(labNum);
 
     numStackScrollArea = new ScrollAreaCustom(this);
-    mainLayout->addWidget(numStackScrollArea);
+    numLayout->addWidget(numStackScrollArea);
 
+    QVBoxLayout* opLayout = new QVBoxLayout;
+    opLayout->setContentsMargins(0, 0, 0, 0);
     QLabel* labOp = new QLabel;
     labFont.setBold(true);
-    labOp->setText("Operator Stack");
+    labOp->setText("Op Stack");
     labOp->setFont(labFont);
     labOp->setAlignment(Qt::AlignRight | Qt::AlignTop);
     labOp->setStyleSheet("color:#E75E5E5E;");
     labOp->setMaximumHeight(20);
-    mainLayout->addWidget(labOp);
+    opLayout->addWidget(labOp);
 
     opStackScrollArea = new ScrollAreaCustom(this);
-    mainLayout->addWidget(opStackScrollArea);
+    opLayout->addWidget(opStackScrollArea);
+
+    mainLayout->addLayout(opLayout);
+    mainLayout->addLayout(numLayout);
 
     //qDebug() << "StackPageWidth:[" << this->x() << "," << this->y() << "," << this->width() << "," << this->height() << "]\n";
 }
@@ -66,6 +73,7 @@ void StackPage::RfrStack(const QString & numDif, const QString & opDif){
         }
     }
     QString opDifCpy = opDif;
+    opDifCpy.replace('*', "×").replace('/', "÷");
     if(!opDif.isEmpty()){
         QTextStream opStream(&opDifCpy);
         if(opDif[0] == 'r'){
@@ -90,7 +98,7 @@ void StackPage::RfrStack(const QString & numDif, const QString & opDif){
                 newChar->setFont(font);
                 newChar->setAlignment(Qt::AlignRight);
                 newChar->resize(newChar->width(), 30);
-                newChar->setText(QString::asprintf("%c", c));
+                newChar->setText(QString::asprintf("%c%s", c, c == '(' ? " " : ""));
                 opStackScrollArea->addWidget(newChar);
             }
         }

@@ -17,6 +17,7 @@ Acrylic::Acrylic(QWidget *parent)
     ui->setupUi(this);
     ui->verticalLayout->setAlignment(Qt::AlignTop);
     this->resize(_width, _height);
+    this->setWindowIcon(QIcon(":/icon/icon"));
 
     /****************************************************************************/
     /********************Things to do with the Acrylic Window********************/
@@ -134,6 +135,30 @@ Acrylic::Acrylic(QWidget *parent)
     ui->opBrckR ->setClickedColor(QColor(30, 30, 30, 70));
     ui->opClear ->setClickedColor(QColor(30, 30, 30, 70));
     ui->bckSpace->setClickedColor(QColor(30, 30, 30, 70));
+
+    //setButtonFont
+    ui->opAdd   ->_setFont(QFont("Arita Sans Thin", 22));
+    ui->opSub   ->_setFont(QFont("Arita Sans Thin", 22));
+    ui->opMulti ->_setFont(QFont("Arita Sans Thin", 19));
+    ui->opDiv   ->_setFont(QFont("Arita Sans Thin", 12));
+    ui->opSqr   ->_setFont(QFont("Microsoft YaHei Light", 12));
+    ui->opPow   ->_setFont(QFont("Microsoft YaHei Light", 12));
+    ui->opMod   ->_setFont(QFont("Microsoft YaHei Light", 12));
+    ui->opBrckL ->_setFont(QFont("Arita Sans Thin", 12));
+    ui->opBrckR ->_setFont(QFont("Arita Sans Thin", 12));
+    ui->opClear ->_setFont(QFont("Microsoft YaHei Light", 12));
+    ui->bckSpace->_setFont(QFont("Arita Sans Thin", 11));
+
+    ui->num0->_setFont(QFont("Microsoft YaHei", 13));
+    ui->num1->_setFont(QFont("Microsoft YaHei", 13));
+    ui->num2->_setFont(QFont("Microsoft YaHei", 13));
+    ui->num3->_setFont(QFont("Microsoft YaHei", 13));
+    ui->num4->_setFont(QFont("Microsoft YaHei", 13));
+    ui->num5->_setFont(QFont("Microsoft YaHei", 13));
+    ui->num6->_setFont(QFont("Microsoft YaHei", 13));
+    ui->num7->_setFont(QFont("Microsoft YaHei", 13));
+    ui->num8->_setFont(QFont("Microsoft YaHei", 13));
+    ui->num9->_setFont(QFont("Microsoft YaHei", 13));
 
     //Connect the buttons with input
     connect(ui->num0, &QPushButton::clicked, [=](){expr.insert('0'); RfrInput(); UpdStack();});
@@ -313,5 +338,120 @@ void Acrylic::windowMaximum(){
         this->resize(lastWidth, lastHeight);
         ui->maximumWindow->setText("□");
         isMaximum = false;
+    }
+}
+
+void Acrylic::keyPressEvent(QKeyEvent *event){
+    switch(event->key()){
+    case Qt::Key_0:
+        expr.insert('0');
+        RfrInput();
+        UpdStack();
+        break;
+    case Qt::Key_1:
+        expr.insert('1');
+        RfrInput();
+        UpdStack();
+        break;
+    case Qt::Key_2:
+        expr.insert('2');
+        RfrInput();
+        UpdStack();
+        break;
+    case Qt::Key_3:
+        expr.insert('3');
+        RfrInput();
+        UpdStack();
+        break;
+    case Qt::Key_4:
+        expr.insert('4');
+        RfrInput();
+        UpdStack();
+        break;
+    case Qt::Key_5:
+        expr.insert('5');
+        RfrInput();
+        UpdStack();
+        break;
+    case Qt::Key_6:
+        expr.insert('6');
+        RfrInput();
+        UpdStack();
+        break;
+    case Qt::Key_7:
+        expr.insert('7');
+        RfrInput();
+        UpdStack();
+        break;
+    case Qt::Key_8:
+        expr.insert('8');
+        RfrInput();
+        UpdStack();
+        break;
+    case Qt::Key_9:
+        expr.insert('9');
+        RfrInput();
+        UpdStack();
+        break;
+    case Qt::Key_ParenLeft:
+        expr.insert('(');
+        RfrInput();
+        UpdStack();
+        break;
+    case Qt::Key_ParenRight:
+        expr.insert(')');
+        RfrInput();
+        UpdStack();
+        break;
+    case Qt::Key_Backspace:
+        expr.backSpace();
+        RfrInput();
+        UpdStack(true);
+        break;
+    case Qt::Key_Plus:
+        expr.insert('+');
+        RfrInput();
+        UpdStack();
+        break;
+    case Qt::Key_Minus:
+        expr.insert('-');
+        RfrInput();
+        UpdStack();
+        break;
+    case Qt::Key_Asterisk:
+        expr.insert('*');
+        RfrInput();
+        UpdStack();
+        break;
+    case Qt::Key_Slash:
+        expr.insert('/');
+        RfrInput();
+        UpdStack();
+        break;
+    case Qt::Key_Percent:
+        expr.insert('%');
+        RfrInput();
+        UpdStack();
+        break;
+    case Qt::Key_AsciiCircum:
+        expr.insert('^');
+        RfrInput();
+        UpdStack();
+        break;
+    case Qt::Key_C:
+        expr.clr();
+        RfrInput();
+        UpdStack(true);
+        break;
+    case Qt::Key_Equal:
+    case Qt::Key_Enter:
+        expr.insert('#');
+        UpdStack();
+        RfrInput();
+        RfrResult();
+        UpdHistory();
+    default:
+        //expr.insert(event->text().at(0).toLatin1());
+        break;
     }
 }
