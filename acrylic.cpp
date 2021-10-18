@@ -443,8 +443,14 @@ void Acrylic::keyPressEvent(QKeyEvent *event){
         RfrInput();
         UpdStack(true);
         break;
+    case Qt::Key_Period:
+        expr.insert('.');
+        RfrInput();
+        UpdStack();
+        break;
     case Qt::Key_Equal:
     case Qt::Key_Enter:
+    case Qt::Key_Return:
         expr.insert('#');
         UpdStack();
         RfrInput();
